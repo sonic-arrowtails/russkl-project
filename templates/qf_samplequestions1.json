@@ -1,0 +1,19 @@
+{
+    "theory": true,
+    "link": "sampletheory1.txt",
+    "case_sensitive": true,
+    "qu_count": 8,
+    "desc": "This is a sample question file.",
+    "progress": 0,
+    "date": "00/00/0000",
+    "qa_list": [
+        [-3, "Write apple in all caps", "APPLE", "apple"],
+        [-4, "Capitalise the first or the last letter in the word cap", "caP&Cap", "grammar2"],
+        [-3, "lymph n_de", "lymph node", "grammar1"],
+        [-3, "Write apple in all caps+1", "APPLE1", "apple"],
+        [-3, "Write apple in all caps+2", "APPLE2", "apple"],
+        [-3, "Write apple in all caps+3", "APPLE3", "apple"],
+        [-3, "Write apple in all caps+4", "APPLE4", "apple"],
+        [-3, "Write apple in all caps+5", "APPLE5", "apple"]
+    ]
+}
