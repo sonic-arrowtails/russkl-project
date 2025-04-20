@@ -1,0 +1,10 @@
+{
+    "/help": ["/help", "/h"],
+    "/save": ["/save","/сохр"],
+    "/end": ["/end", "/7", "/конец", "/fin"],
+    "/theory": ["/theory"],
+    "/skip": ["/skip"],
+    "/menu": ["/menu", "/m"]
+  }
+  
+
