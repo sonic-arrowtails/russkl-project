@@ -47,6 +47,7 @@
     "delete_user_cancel":"\nУдаление пользователя {} отменено",
 
     "return_to_menu":"\nВернуться в меню (Enter)",
+    "return_to_select_file":"\nВернуться к выбору файла (Enter)",
 
     "view_theory":"\nТеория:\n",
     "view_theory_null":"\nДля этого файла нет теории",

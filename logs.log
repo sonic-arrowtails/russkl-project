@@ -1,0 +1,67 @@
+2025-04-20 21:39:34,657:DEBUG:debug;)
+2025-04-20 21:39:34,658:DEBUG:
+startup
+2025-04-20 21:40:14,878:DEBUG:debug;)
+2025-04-20 21:40:14,878:DEBUG:
+startup
+2025-04-20 21:40:14,879:DEBUG:new usr_list.txt created
+2025-04-20 21:40:16,201:INFO:user dir set as /Users/arrowtails/Documents/prog_folder_json/users/tempuser
+2025-04-20 21:40:16,207:INFO:loaded file data /Users/arrowtails/Documents/prog_folder_json/users/tempuser/tempuser_qf_samplequestions1.json
+2025-04-20 21:40:16,207:INFO:loaded file data /Users/arrowtails/Documents/prog_folder_json/users/tempuser/tempuser_qf_udareniya.json
+2025-04-20 21:40:16,207:DEBUG:menu
+2025-04-20 21:40:17,687:DEBUG:learn
+2025-04-20 21:40:17,688:DEBUG:select_file from choice [<__main__.QuestionSet object at 0x10664c2f0>, <__main__.QuestionSet object at 0x10666d310>]
+2025-04-20 21:40:18,823:DEBUG:file pointer set to 0
+2025-04-20 21:40:30,759:DEBUG:command /7
+2025-04-20 21:40:30,761:DEBUG:menu
+2025-04-20 21:40:37,092:DEBUG:user help
+2025-04-20 21:41:09,514:DEBUG:debug;)
+2025-04-20 21:41:09,515:DEBUG:
+startup
+2025-04-20 21:41:09,515:DEBUG:tempuser deleted from last session
+2025-04-20 21:41:12,269:INFO:user dir set as /Users/arrowtails/Documents/prog_folder_json/users/we
+2025-04-20 21:41:12,273:INFO:loaded file data /Users/arrowtails/Documents/prog_folder_json/users/we/we_qf_udareniya.json
+2025-04-20 21:41:12,273:INFO:loaded file data /Users/arrowtails/Documents/prog_folder_json/users/we/we_qf_samplequestions1.json
+2025-04-20 21:41:12,273:DEBUG:menu
+2025-04-20 21:42:04,680:DEBUG:debug;)
+2025-04-20 21:42:04,680:DEBUG:
+startup
+2025-04-20 21:42:06,198:INFO:user dir set as /Users/arrowtails/Documents/prog_folder_json/users/we
+2025-04-20 21:42:06,200:INFO:loaded file data /Users/arrowtails/Documents/prog_folder_json/users/we/we_qf_udareniya.json
+2025-04-20 21:42:06,200:INFO:loaded file data /Users/arrowtails/Documents/prog_folder_json/users/we/we_qf_samplequestions1.json
+2025-04-20 21:42:06,200:DEBUG:menu
+2025-04-20 21:42:12,459:DEBUG:learn
+2025-04-20 21:42:12,459:DEBUG:select_file from choice [<__main__.QuestionSet object at 0x102a0c2f0>, <__main__.QuestionSet object at 0x102933d90>]
+2025-04-20 21:42:16,762:DEBUG:file pointer set to 0
+2025-04-20 21:42:27,900:DEBUG:command /7
+2025-04-20 21:42:27,902:DEBUG:menu
+2025-04-20 21:42:31,586:DEBUG:other funcs
+2025-04-20 21:42:42,646:DEBUG:
+startup
+2025-04-20 21:43:33,773:DEBUG:debug;)
+2025-04-20 21:43:33,773:DEBUG:
+startup
+2025-04-20 21:43:35,182:INFO:user dir set as /Users/arrowtails/Documents/prog_folder_json/users/цу
+2025-04-20 21:43:35,187:INFO:loaded file data /Users/arrowtails/Documents/prog_folder_json/users/цу/цу_qf_udareniya.json
+2025-04-20 21:43:35,187:INFO:loaded file data /Users/arrowtails/Documents/prog_folder_json/users/цу/цу_qf_samplequestions1.json
+2025-04-20 21:43:35,188:DEBUG:menu
+2025-04-20 21:43:55,222:DEBUG:menu
+2025-04-20 21:43:56,755:DEBUG:menu
+2025-04-20 21:43:58,611:DEBUG:menu
+2025-04-20 21:44:04,879:DEBUG:menu
+2025-04-20 21:44:11,633:DEBUG:other funcs
+2025-04-20 21:44:14,068:DEBUG:
+startup
+2025-04-21 18:01:17,338:DEBUG:debug;)
+2025-04-21 18:03:50,105:DEBUG:debug;)
+2025-04-21 18:08:23,487:DEBUG:debug;)
+2025-04-21 18:09:56,799:DEBUG:debug;)
+2025-04-21 18:09:56,800:DEBUG:
+startup
+2025-04-21 18:10:04,686:DEBUG:debug;)
+2025-04-21 18:10:04,688:DEBUG:
+startup
+2025-04-21 18:10:10,035:DEBUG:debug;)
+2025-04-21 18:10:10,037:DEBUG:
+startup
+2025-04-21 18:10:19,063:DEBUG:debug;)

@@ -1,9 +1,7 @@
-from collections import deque
-from random import choices
-from random import shuffle
+from collections import deque, defaultdict # queue + resolve key error
+from random import choices, shuffle 
 import os
 import shutil
-from collections import defaultdict # resolves key error
 from datetime import datetime
 from pathlib import Path
 import json
@@ -12,49 +10,55 @@ import logging
 logging.basicConfig(filename="logs.log",level=logging.DEBUG,format="%(asctime)s:%(levelname)s:%(message)s")
 logging.debug("debug;)")
 
-user = {
+user = {  # global var
     "name": "tempuser",
     "dir": None
     }
 
-documents_dir = Path.home() / "Documents"
+# PROGRAM_DIR is current working directory
+try:
+    PROGRAM_DIR = Path(__file__).parent.parent
 
-if (documents_dir/"prog_folder_json").exists() and documents_dir.is_dir():  # check if downloads folder exists
-    program_dir = documents_dir / "prog_folder_json"  # program dir within documents dir
-else:
-    raise FileNotFoundError("папка documents не найдена - directory not found, cant even start the program")
+    USERS_DIR = PROGRAM_DIR / "users"
+    if not USERS_DIR.exists():
+        USERS_DIR.mkdir()
+    THEORY_DIR = PROGRAM_DIR / "theory"
+    if not THEORY_DIR.exists():
+        THEORY_DIR.mkdir()
+    PROMPTS_DIR = PROGRAM_DIR / "prompts"
+    if not PROMPTS_DIR.exists():
+        raise FileNotFoundError("папка prompts не найдена - directory not found, can't even start the program")
+    TEMPLATE_DIR = PROGRAM_DIR / "templates"
+    if not TEMPLATE_DIR.exists():
+        raise FileNotFoundError("папка templates не найдена - directory not found, can't even start the program")
 
-users_dir = program_dir / "users"  # "users" directory path in program_dir
-if not users_dir.exists():
-    users_dir.mkdir()  
+except Exception as e:
+    print(f"critical error during setup: {e}")
+    raise
 
-theory_dir = program_dir / "theory" 
-prompts_dir = program_dir / "prompts"
-
-if (program_dir / "templates").exists():
-    template_dir = program_dir / "templates"  # "templates" directory path in program_dir
-else: 
-    raise FileNotFoundError("папка templates не найдена - directory not found, cant even start the program")
+commands = json.load(open(PROGRAM_DIR/"proga"/"commands.json", mode="r"))
 
 
-commands = json.load(open(program_dir/"proga"/"commands.json", mode="r"))
-
-default_propmts = {
-    "tempkey":"tempvalue"
-    }
-
+""" PROMPTS """
 def load_prompts(file_name: str):
-    file_path = prompts_dir / file_name
+    file_path = PROMPTS_DIR / file_name
     if os.path.exists(file_path):
         with open(file_path, "r") as file:
             return defaultdict(lambda: "<this prompt does not exist>", json.load(file))
-    else: print(f"Не найден файл {file_path} file not found, cannot change prompts")
+    else: print(f"Не найден файл {file_path} file not found, cannot change prompts") # !!! this to be verified in select prompts
 
-prompts = default_propmts
-prompts = load_prompts("pr_russian.json")
+def init_prompts(): # asks english/russian, lets user chooose, loads prompts
+    global prompts
+    print("Выберите язык/Select language\n1 - Русский/Russian\n2 - English")
+    choice = input("Выберите язык/Select language (1,2): ")
+    while choice not in ["1", "2"]:
+        choice = input("Неверный выбор/Invalid choice, выберите язык/Select language (1,2): ")
+    match choice:
+        case "1": prompts = load_prompts("pr_russian.json")
+        case "2": prompts = load_prompts("pr_english.json")
 
 def main():
-    # ААХАХАХАХАХАХАХАХАХАХАХАХАХ
+    init_prompts()
     startup()
 
 def norm_e(string): # normalise ye and yo
@@ -149,7 +153,7 @@ class QuestionSet:
         self.progress = data["progress"]
         self.date = data["date"]
         if self.theory:
-            self.theory_path = theory_dir/self.link if (theory_dir/self.link).exists() else None
+            self.theory_path = THEORY_DIR/self.link if (THEORY_DIR/self.link).exists() else None
         self.qa_list = None
         self.theory_dict = None
     
@@ -199,7 +203,7 @@ class QuestionSet:
             json.dump(write_data, file, indent=4)
     
 def load_file_data(): # loads all data excet questions of all files in user["dir"], sets QuestionSet.file_pointer
-    file_list = [(user["dir"]/f) for f in os.listdir(user["dir"]) if f.startswith(f'{user["name"]}_qf_')] # dealing with . files, temporary verifictaion
+    file_list = [(user["dir"]/f) for f in os.listdir(user["dir"]) if f.startswith(f'{user["name"]}_qf_')] # format validation
     all_files_data = []
     
     for file_path in file_list:
@@ -215,15 +219,16 @@ def startup(): # input user name
     logging.debug("\nstartup")
     print(prompts["intro"])
     
-    if (users_dir/"tempuser").exists():
-        shutil.rmtree(users_dir/"tempuser") # delete tempuser from last session
+    if (USERS_DIR/"tempuser").exists():
+        shutil.rmtree(USERS_DIR/"tempuser") # delete tempuser from last session
         logging.debug("tempuser deleted from last session")
     usr_list = []
-    if (users_dir/"usr_list.txt").exists():
-        with open(users_dir/"usr_list.txt", mode= "r") as file:
+
+    if (USERS_DIR/"usr_list.txt").exists():
+        with open(USERS_DIR/"usr_list.txt", mode= "r") as file:
             usr_list = [line[:-1] for line in file.readlines()]
     else:
-        (users_dir/"usr_list.txt").touch() #create new
+        (USERS_DIR/"usr_list.txt").touch() #create new
         logging.debug("new usr_list.txt created")
 
     print(prompts["input_user"])
@@ -233,7 +238,7 @@ def startup(): # input user name
 
     usr_input = input()
     if usr_input: user["name"] = usr_input  # check if not blank, if it is, do nothing
-    user["dir"] = users_dir / user["name"]
+    user["dir"] = USERS_DIR / user["name"]
     logging.info(f"user dir set as {user["dir"]}")
 
     if not user["dir"].exists(): create_files()
@@ -247,8 +252,8 @@ def startup(): # input user name
 
 def create_files(): #copytree and rename
     if user["name"]!= "tempuser": 
-        with open(users_dir/"usr_list.txt", mode= "a")as file: file.write(user["name"]+"\n")
-    user["dir"] = shutil.copytree(template_dir, user["dir"])
+        with open(USERS_DIR/"usr_list.txt", mode= "a")as file: file.write(user["name"]+"\n")
+    user["dir"] = shutil.copytree(TEMPLATE_DIR, user["dir"])
     for file in os.listdir(user["dir"]):
         if file.startswith("qf_"): os.rename(user["dir"]/file, user["dir"]/(user["name"]+"_"+file))
 
@@ -270,7 +275,7 @@ def menu():
             print(prompts["invalid_menu_choice"])
             menu()
 
-def select_file(): #previously in load_file_data
+def select_file():
     print(prompts["select_file"])
     logging.debug(f"select_file from choice {QuestionSet.sets}")
     for i in range(0, len(QuestionSet.sets)):
@@ -278,10 +283,26 @@ def select_file(): #previously in load_file_data
         print(QuestionSet.sets[i])  #__str__
     
     user_file_input = input(prompts["file_choice"])
+
     while not user_file_input in [str(num) for num in range(1, len(QuestionSet.sets)+1)]:
-        user_file_input = input(prompts["invalid_choice"])
+        if user_file_input.startswith("/"):
+            if user_file_input in commands["/help"]:
+                logging.debug("/help")
+                print(prompts["select_file_help"])
+                input(prompts["return_to_select_file"])
+                select_file()
+            elif user_file_input in commands["/menu"]:
+                logging.debug("/menu, selection aborted")
+                menu()
+            else:
+                print(prompts["invalid_command"])
+        else: user_file_input = input(prompts["invalid_choice"])
+        
+        user_file_input = input(prompts["file_choice"])
+    
     QuestionSet.file_pointer = int(user_file_input)-1
     logging.debug(f"file pointer set to {QuestionSet.file_pointer}")
+        
 
 def select_question(bank): #returns instance, removes from bank
 
@@ -319,7 +340,7 @@ def learn():
                 logging.debug(f"command {command}")
                 match command:
                 
-                    case _ if command in commands["/save"]:
+                    case _ if command in commands["/save"] or command in commands["/menu"]:
                         counter = 10
                     case _ if command in commands["/theory"]:
                         if theory_dict == {}: print("no theory file for this set")
@@ -390,7 +411,7 @@ def test():
                 match command:
                     case _ if command in commands["/help"]:
                         print(prompts["test_help"])
-                    case _ if command in commands["/end"]: 
+                    case _ if command in commands["/end"] or command in commands["/menu"]: 
                         endtest = True
                     case _:
                         print(prompts["invalid_command"])
@@ -409,7 +430,6 @@ def test():
     for element in question_list:
         if element.ind == 3: print(element.ans)
 
-    # > update date in the file?
     input(prompts["return_to_menu"])
     menu()
 
@@ -445,12 +465,12 @@ def select_propmts():
     logging.debug("select prompts")
     print(prompts["select_prompts"])
     prompts_list = []
-    for file in os.listdir(prompts_dir):
+    for file in os.listdir(PROMPTS_DIR):
         if file.startswit("pr_"): prompts_list.append(file)
 
     for i, file in enumerate(prompts_list):
         print(prompts["file_number"].format(i+1),end="")
-        with open(prompts_dir/file) as file:
+        with open(PROMPTS_DIR/file) as file:
             content = json.load(file)
             print(content["info"])
     
@@ -477,8 +497,12 @@ def other_funcs():
                 print(prompts["delete_user_success"])
             else: print(prompts["delete_user_cancel"])
 
-            # delete usr_list.txt
-            (users_dir/"usr_list.txt").delete()
+            # delete the user name from usr_list.txt: USERS_DIR/"usr_list.txt"
+            with open(USERS_DIR/"usr_list.txt", mode= "r") as file:
+                lines = file.readlines()
+            with open(USERS_DIR/"usr_list.txt", mode= "w") as file:
+                for line in lines:
+                    if line.strip("\n") != user["name"]: file.write(line)
 
             startup()
         case "2": menu()
@@ -492,7 +516,8 @@ def other_funcs():
 
 def user_help():
     logging.debug("user help")
-    print(prompts["user_help"])
+    command_list = [", ".join(element) for element in commands.values()]
+    print(prompts["user_help"].format(*command_list))
     input(prompts["return_to_menu"])
     menu()
 
