@@ -4,7 +4,7 @@
     "case_sensitive": true,
     "display_q":true,
     "main_question": "Поставить ударение в словах. Ударную гласную выделить заглавной буквой.\n",
-    "qu_count": -1,
+    "qu_count": 75,
     "desc": "ЕГЭ Задание 4: орфоэпия",
     "progress": 0,
     "date": null,
