@@ -1,1 +1,56 @@
-{}
+{
+    "info": "English",
+    "intro": "\n\nHi! I'm a bot that will help you study and test yourself with questions.\n\n",
+    "main_help": "There are several commands:\n\nStudy/Test:\n{} Shows all currently available commands.\n{} Saves progress\n{} end\n{} Shows theory. Unavailable in test mode.\n{} Skips question. Unavailable in test mode.\n\nAlways available:\n{} Returns to menu.",
+
+    "QAItem": "{} -- {}",
+    "input_user": "\nEnter a nickname or username to save progress, or just press Enter to continue without saving.",
+    "user_list": "Continue under a name from the list: ",
+    "folder_not_found": "Folder not found. Contact the developer ahahahahahahahahahah",
+
+    "try_again": "\nTry again",
+    "ans_request": "Answer: ",
+    "incorrect": "Incorrect",
+    "correct": "Correct",
+    "output_correct_ans": "\nCorrect answer: {}",
+    "other_correct_ans": "\nAlternative correct answers: {}",
+
+    "welcome_user": "\nWelcome, {}!",
+    "welcome_tempuser": "\nWelcome! This is a guest account",
+    "menu": "\nMenu:\n1 study\n2 test\n3 view questions + theory\n4 download questions + theory\n5 other functions\n6 help\n7 end session\n\n",
+    "menu_choice": "Choose a menu item (number): ",
+    "invalid_menu_choice": "Invalid input, try again: ",
+
+    "select_file": "\n\nChoose a file to work with:\n",
+    "file_number": "\n{}: ",
+    "file_choice": "\nEnter the number of the file you want to use (digit): ",
+    "invalid_choice": "\nInvalid input, try again: ",
+
+    "file_data": "{}\nNumber of questions: {}",
+    "last_opened": "\nLast opened: {date}\n",
+
+    "learn_help": "\n/save, /prog - save and check \"confidence\"\n/help - this window\n/theory - view theory\n/skip - skip question\n/end - exit Study mode\n",
+    "invalid_command": "no such command exists",
+
+    "test_list_len": "\nNumber of questions: {}",
+    "test_len_choice": "\nEnter the number of questions for the test: ",
+    "test_help": "\n/end and /help",
+    "test_results": "\nTest results:\n{} correct answers out of {}n",
+
+    "save_success": "\nsaved",
+
+    "user_help": "There are several commands:\n\nStudy/Test:\n{} Shows all currently available commands.\n{} Save\n{} Save progress and return to menu.\n{} Show theory. Unavailable in test mode.\n{} Skip question. Unavailable in test mode.\n\nAlways available:\n{} Return to menu.",
+
+    "other_funcs": "\nMenu:\n1 delete user\n2 change language\n",
+    "delete_user_confirm": "\nAre you sure you want to delete user {}? (/ to confirm)",
+    "delete_user_success": "\nUser {} successfully deleted",
+    "delete_user_cancel": "\nUser {} deletion cancelled",
+
+    "return_to_menu": "\nReturn to menu (Enter)",
+    "return_to_select_file": "\nReturn to file selection (Enter)",
+
+    "view_theory": "\nTheory:\n",
+    "view_theory_null": "\nNo theory available for this file",
+    "view_qa_list": "\nList of questions",
+    "view_a_only": "\nList of words"
+}
