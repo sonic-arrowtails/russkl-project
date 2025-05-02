@@ -316,13 +316,15 @@ def learn():
     QuestionSet.load_questions()
     QuestionSet.load_theory()
 
-    question_bank = QuestionSet.sets[QuestionSet.file_pointer].qa_list
-    theory_dict = QuestionSet.sets[QuestionSet.file_pointer].theory_dict
+    qa_set = QuestionSet.sets[QuestionSet.file_pointer]
+
+    question_bank = qa_set.qa_list
+    theory_dict = qa_set.theory_dict
 
     endsession = False
     question_queue = deque()
 
-    print(QuestionSet.sets[QuestionSet.file_pointer].main_question)
+    print(qa_set.main_question)
     while not endsession:
         counter = 0
         for i in range(7): question_queue.append(select_question(question_bank))  # load 7 questions, one by one so no repeats
@@ -355,11 +357,12 @@ def learn():
                     case _ if command in commands["/end"]: 
                         endsession = True
                     case _:
-                        print("invalid_command")
+                        print(prompts["invalid_command"])
             else: 
                 if not result:  # check from question()
                     # print("incorrect")
-                    if user["theory"] and user["theory_path"] != None: print(theory_dict[current_question.t_key])
+                    if qa_set.theory and qa_set.link != None and theory_dict[current_question.t_key] != None: 
+                        print(theory_dict[current_question.t_key])
                     print()
                     
                 question_bank.append(current_question)
@@ -423,10 +426,10 @@ def test():
     print()
     print(prompts["test_results"].format(correct_count,question_count))
 
-    print("correct:")
+    print(prompts["test_correct"])
     for element in question_list:
         if element.ind == 5: print(element.ans)
-    print("incorrect:")
+    print(prompts["test_incorrect"])
     for element in question_list:
         if element.ind == 3: print(element.ans)
 

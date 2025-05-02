@@ -35,7 +35,9 @@
     "test_list_len": "\nКоличество вопросов: {}",
     "test_len_choice": "\nВведите количество вопросов для теста: ",
     "test_help":"\n/end and /help",
-    "test_results":"\nРезультаты теста:\n{} правильных ответов из {}n",
+    "test_results":"\nРезультаты теста:\n{} правильных ответов из {}\n",
+    "test_correct":"\nПравильно:",
+    "test_incorrect":"\nНеправильно:",
 
     "save_success":"\nсохранено",
 
